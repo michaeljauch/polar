@@ -119,6 +119,8 @@ for(i in 1:length(dim_list)){
 
 #save(results_df, file='~/results_df_second_run.RData')
 
+# Use a sql-style query to calculate the quantities which appear in Tables 2-5: 
+
 library(sqldf)
 query <- 
 "

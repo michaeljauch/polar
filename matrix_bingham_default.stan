@@ -1,14 +1,19 @@
+// This is the Stan code we use to simulate from the matrix Bingham 
+// via polar expansion with the default conditional distribution. 
+// This code is called in the script matrix_bingham_sim_study.R 
+
 data{
-  int<lower=0> p; // Number of rows
-  int<lower=1> k; // Number of columns
+  int<lower=0> p; // Number of rows of the matrix 
+  int<lower=1> k; // Number of columns of the matrix 
   cov_matrix[p] SigInv; // Inverse of parameter of matrix Bingham (SPD)
 }
 
 parameters{
-  matrix[p,k] X; 
+  matrix[p,k] X; // X is the p x k real matix. 
 }
 
 transformed parameters{
+  // We calculate the orthogonal matrix Q from X using the polar decomp.
   matrix[p,k] Q; 
   {
   vector[k] eval;
@@ -24,5 +29,6 @@ transformed parameters{
 }
 
 model{
-    target += - trace(X'*X/2) - trace(Q'*SigInv*Q/2); 
+  // Here we specify the log of the density f_X^alt. 
+  target += - trace(X'*X/2) - trace(Q'*SigInv*Q/2); 
 }
