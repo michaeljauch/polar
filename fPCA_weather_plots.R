@@ -55,13 +55,13 @@ beta <- 1172.206
 points(x, dinvgamma(x=x, shape=alpha, rate=beta), type='l', lwd=2)
 
 # Right panel 
-plot(days, svdM$v[,3], type='l', xlab='Day', lwd=2, col='white', ylab='')
+plot(days, -svdM$v[,3], type='l', xlab='Day', lwd=2, col='white', ylab='')
 idx <- seq(1,101, 10)
 for(i in idx){
-  points(days, draws$V[i,,3], type='l', col=gray.colors(100)[60])
+  points(days, -draws$V[i,,3], type='l', col=gray.colors(100)[60])
   
 }
-points(days, svdM$v[,3], type='l', xlab='Day', lwd=2)
+points(days, -svdM$v[,3], type='l', xlab='Day', lwd=2)
 
 dev.off()
 
